@@ -547,7 +547,7 @@ PUBLIC int socketSelect(int sid, int timeout)
             Initialize the ready masks and compute the mask offsets.
          */
         index = sp->sock / (NBBY * sizeof(fd_mask));
-        bit = 1 << (sp->sock % (NBBY * sizeof(fd_mask)));
+        bit = ((ssize) 1) << (sp->sock % (NBBY * sizeof(fd_mask)));
         /*
             Set the appropriate bit in the ready masks for the sp->sock.
          */
@@ -584,7 +584,7 @@ PUBLIC int socketSelect(int sid, int timeout)
             }
         }
         index = sp->sock / (NBBY * sizeof(fd_mask));
-        bit = 1 << (sp->sock % (NBBY * sizeof(fd_mask)));
+        bit = ((ssize) 1) << (sp->sock % (NBBY * sizeof(fd_mask)));
 
         if (sp->flags & SOCKET_RESERVICE) {
             if (sp->handlerMask & SOCKET_READABLE) {
@@ -614,7 +614,7 @@ PUBLIC int socketSelect(int sid, int timeout)
     wfree(exceptFds);
     return nEvents;
 }
-#endif /* WINDOWS || CE */
+#endif /* !(WINDOWS || CE) */
 
 
 PUBLIC void socketProcess(void)
