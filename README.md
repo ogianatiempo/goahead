@@ -1,4 +1,4 @@
-Embedthis GoAhead Edition
+Embedthis GoAhead
 ===
 
 The most popular little embedded web server.

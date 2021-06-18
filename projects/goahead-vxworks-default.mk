@@ -1,5 +1,5 @@
 #
-#   goahead-vxworks-default.mk -- Makefile to build Embedthis GoAhead Enterprise Edition for vxworks
+#   goahead-vxworks-default.mk -- Makefile to build Embedthis GoAhead for vxworks
 #
 
 NAME                  := goahead

@@ -1,5 +1,5 @@
 #
-#   goahead-freebsd-default.mk -- Makefile to build Embedthis GoAhead Enterprise Edition for freebsd
+#   goahead-freebsd-default.mk -- Makefile to build Embedthis GoAhead for freebsd
 #
 
 NAME                  := goahead
