@@ -1648,7 +1648,7 @@ static char *makeUri(cchar *scheme, cchar *host, int port, cchar *path)
  */
 PUBLIC void websRedirect(Webs *wp, cchar *uri)
 {
-    char    *message, *location, *scheme, *host, *pstr;
+    char    *encoded, *message, *location, *scheme, *host, *pstr;
     bool    secure, fullyQualified;
     ssize   len;
     int     originalPort, port;
@@ -1692,10 +1692,11 @@ PUBLIC void websRedirect(Webs *wp, cchar *uri)
     } else if (!fullyQualified) {
         uri = location = makeUri(scheme, host, port, uri);
     }
+    encoded = websEscapeHtml(uri);
     message = sfmt("<html><head></head><body>\r\n\
         This document has moved to a new <a href=\"%s\">location</a>.\r\n\
         Please update your documents to reflect the new location.\r\n\
-        </body></html>\r\n", uri);
+        </body></html>\r\n", encoded);
     len = slen(message);
     websSetStatus(wp, HTTP_CODE_MOVED_TEMPORARILY);
     websWriteHeaders(wp, len + 2, uri);
@@ -1706,6 +1707,7 @@ PUBLIC void websRedirect(Webs *wp, cchar *uri)
     wfree(host);
     wfree(message);
     wfree(location);
+    wfree(encoded);
 }
 
 
