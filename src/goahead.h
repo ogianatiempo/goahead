@@ -2282,6 +2282,15 @@ PUBLIC char *websEncode64Block(char *str, ssize len);
 PUBLIC char *websEscapeHtml(cchar *str);
 
 /**
+    Escape unsafe URI characters in a string using %CC substitution
+    @param str String to escape
+    @return An allocated block containing the escaped string. Caller must free.
+    @ingroup Webs
+    @stability Stable
+ */
+PUBLIC char *websEscapeUri(cchar *str);
+
+/**
     Complete a request with an error response
     @param wp Webs request object
     @param code HTTP status code
