@@ -330,6 +330,7 @@
 <tr class="apiDef"><td class="apiType">void</td><td><a href="#group___webs_1gac898af1d6d0c6cccb905e6a53479b559" class="nameRef">websError</a>(<a href="#group___webs" class="ref">Webs</a> *wp, int code, <a href="osdep.html#osdep_8h_1a0f128c3e0c83721af0220c00554e9c4e" class="ref">cchar</a> *fmt, ...)</td></tr><tr class="apiBrief"><td>&nbsp;</td><td>Complete a request with an error response.</td></tr>
 <tr class="apiDef"><td class="apiType"><a href="osdep.html#osdep_8h_1a0f128c3e0c83721af0220c00554e9c4e" class="ref">cchar*</a></td><td><a href="#group___webs_1ga36a32239715d1f4eedff518aa81542ba" class="nameRef">websErrorMsg</a>(int code)</td></tr><tr class="apiBrief"><td>&nbsp;</td><td>Get a message for a HTTP status code.</td></tr>
 <tr class="apiDef"><td class="apiType">char*</td><td><a href="#group___webs_1ga22d0cc25b40e3a8039b9c62da85661bd" class="nameRef">websEscapeHtml</a>(<a href="osdep.html#osdep_8h_1a0f128c3e0c83721af0220c00554e9c4e" class="ref">cchar</a> *str)</td></tr><tr class="apiBrief"><td>&nbsp;</td><td>Escape unsafe characters in a string.</td></tr>
+<tr class="apiDef"><td class="apiType">char*</td><td><a href="#group___webs_1ga53edc269c112daec8f25ce42bc91421c" class="nameRef">websEscapeUri</a>(<a href="osdep.html#osdep_8h_1a0f128c3e0c83721af0220c00554e9c4e" class="ref">cchar</a> *str)</td></tr><tr class="apiBrief"><td>&nbsp;</td><td>Escape unsafe URI characters in a string using CC substitution.</td></tr>
 <tr class="apiDef"><td class="apiType">void</td><td><a href="#group___webs_1gaf24cee2f9e39e20e09e73067b8b5b072" class="nameRef">websFileOpen</a>(void)</td></tr><tr class="apiBrief"><td>&nbsp;</td><td>Open and initialize the file handler.</td></tr>
 <tr class="apiDef"><td class="apiType">int</td><td><a href="#group___webs_1ga6525ac98afd32c69fd0a7985c0b87f5f" class="nameRef">websFlush</a>(<a href="#group___webs" class="ref">Webs</a> *wp, <a href="osdep.html#osdep_8h_1ad5c9d4ba3dc37783a528b0925dc981a0" class="ref">bool</a> block)</td></tr><tr class="apiBrief"><td>&nbsp;</td><td>Flush buffered transmit data and compact the transmit buffer to make room for more data.</td></tr>
 <tr class="apiDef"><td class="apiType">void</td><td><a href="#group___webs_1ga34a9c871eaf4cba49ff81174318af979" class="nameRef">websFree</a>(<a href="#group___webs" class="ref">Webs</a> *wp)</td></tr><tr class="apiBrief"><td>&nbsp;</td><td>Free the webs request object.</td></tr>
@@ -1752,6 +1753,25 @@ Bytes actually transferred.
   </div>
   <div class="apiDetail">
 <p>Escape unsafe characters in a string.</p>
+    <dl><dt>Parameters:</dt><dd>
+    <table class="parameters" title="Parameters">
+    <tr><td class="param">str</td><td>String to escape.</td>
+    </table></dd></dl>
+    <dl><dt>Returns:</dt><dd>An allocated block containing the escaped string. Caller must free.</dd></dl>
+    <dl><dt><b>API</b> Stability:</dt><dd>Stable.</dd></dl>
+    <dl><dt>See Also:</dt><dd>
+    </dd></dl>
+  </div>
+</div>
+<a name="group___webs_1ga53edc269c112daec8f25ce42bc91421c"></a>
+<div class="api">
+  <div class="prototype">
+    char *
+    websEscapeUri
+(<a href="osdep.html#osdep_8h_1a0f128c3e0c83721af0220c00554e9c4e" class="ref">cchar</a> *str)
+  </div>
+  <div class="apiDetail">
+<p>Escape unsafe URI characters in a string using CC substitution.</p>
     <dl><dt>Parameters:</dt><dd>
     <table class="parameters" title="Parameters">
     <tr><td class="param">str</td><td>String to escape.</td>
