@@ -468,7 +468,10 @@ static void termWebs(Webs *wp, int reuse)
         close(wp->cgifd);
         wp->cgifd = -1;
     }
-    wfree(wp->cgiStdin);
+    if (wp->cgiStdin) {
+        unlink(wp->cgiStdin);
+        wfree(wp->cgiStdin);
+    }
 #endif
 #if ME_GOAHEAD_UPLOAD
     wfree(wp->clientFilename);
