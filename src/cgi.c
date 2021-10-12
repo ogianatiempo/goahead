@@ -59,6 +59,7 @@ static cchar *envBlackList[] = {
     "JAVA_TOOL_OPTIONS",
     "LIBPATH",
     "LOCALDOMAIN",
+    "NODE_OPTIONS",
     "NLSPATH",
     "NULLCMD",
     "PATH",
