@@ -173,10 +173,10 @@ PUBLIC bool cgiHandler(Webs *wp)
     if (wp->vars) {
         for (n = 0, s = hashFirst(wp->vars); s != NULL; s = hashNext(wp->vars, s)) {
             if (s->content.valid && s->content.type == string) {
-                vp = strim(s->name.value.string, 0, WEBS_TRIM_START);
+                vp = strim(s->name.value.string, " \t\r\n", WEBS_TRIM_BOTH);
                 if (smatch(vp, "REMOTE_HOST") || smatch(vp, "HTTP_AUTHORIZATION") ||
                     smatch(vp, "IFS") || smatch(vp, "CDPATH") ||
-                    smatch(vp, "PATH") || sstarts(vp, "LD_")) {
+                    smatch(vp, "PATH") || sstarts(vp, "PYTHONPATH") || sstarts(vp, "LD_")) {
                     continue;
                 }
                 if (s->arg != 0 && *ME_GOAHEAD_CGI_VAR_PREFIX != '\0') {
