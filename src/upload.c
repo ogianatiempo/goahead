@@ -320,6 +320,7 @@ static bool processContentData(Webs *wp)
 {
     WebsUpload  *file;
     WebsBuf     *content;
+    WebsKey     *sp;
     ssize       size, nbytes, len;
     char        *data, *bp;
 
@@ -380,7 +381,9 @@ static bool processContentData(Webs *wp)
             trace(5, "uploadFilter: form[%s] = %s", wp->uploadVar, data);
             websDecodeUrl(wp->uploadVar, wp->uploadVar, -1);
             websDecodeUrl(data, data, -1);
-            websSetVar(wp, wp->uploadVar, data);
+            sp = websSetVar(wp, wp->uploadVar, data);
+            //  Flag as untrusted so CGI will prefix
+            sp->arg = 1;
         }
         websConsumeInput(wp, nbytes);
     }
