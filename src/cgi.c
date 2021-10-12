@@ -38,6 +38,54 @@ typedef struct Cgi {            /* Struct for CGI tasks which have completed */
 static Cgi      **cgiList;      /* walloc chain list of wp's to be closed */
 static int      cgiMax;         /* Size of walloc list */
 
+/*
+    The real protection is via ME_GOAHEAD_CGI_VAR_PREFIX which prefixes user env vars with CGI_.
+    This list is not complete and not intended to be. "Belt and suspenders".
+*/
+static cchar *envBlackList[] = {
+    "AUTHSTATE",
+    "BASHOPTS",
+    "BASH_ENV",
+    "CDPATH",
+    "ENV",
+    "FPATH",
+    "GLOBIGNORE",
+    "HOSTALIASES",
+    "HTTP_AUTHORIZATION",
+    "IFS",
+    "JAVA_TOOL_OPTIONS",
+    "LIBPATH",
+    "LOCALDOMAIN",
+    "NLSPATH",
+    "NULLCMD",
+    "PATH",
+    "PATH_LOCALE",
+    "PERL5DB",
+    "PERL5LIB",
+    "PERL5OPT",
+    "PERLIO_DEBUG",
+    "PERLLIB",
+    "PS4",
+    "PYTHONHOME",
+    "PYTHONINSPECT",
+    "PYTHONPATH",
+    "PYTHONUSERBASE",
+    "READNULLCMD",
+    "REMOTE_HOST",
+    "RES_OPTIONS",
+    "RUBYLIB",
+    "RUBYOPT",
+    "SHELLOPTS",
+    "SHLIB_PATH",
+    "TERMCAP",
+    "TERMINFO",
+    "TERMINFO_DIRS",
+    "TERMPATH",
+    "TMPPREFIX",
+    "ZDOTDIR",
+    NULL
+};
+
 /************************************ Forwards ********************************/
 
 static int checkCgi(CgiPid handle);
@@ -54,6 +102,7 @@ PUBLIC bool cgiHandler(Webs *wp)
     WebsKey     *s;
     char        cgiPrefix[ME_GOAHEAD_LIMIT_FILENAME], *stdIn, *stdOut, cwd[ME_GOAHEAD_LIMIT_FILENAME];
     char        *cp, *cgiName, *cgiPath, **argp, **envp, **ep, *tok, *query, *dir, *extraPath, *exe, *vp;
+    cchar       **bp;
     CgiPid      pHandle;
     int         n, envpsize, argpsize, cid;
 
@@ -174,9 +223,12 @@ PUBLIC bool cgiHandler(Webs *wp)
         for (n = 0, s = hashFirst(wp->vars); s != NULL; s = hashNext(wp->vars, s)) {
             if (s->content.valid && s->content.type == string) {
                 vp = strim(s->name.value.string, " \t\r\n", WEBS_TRIM_BOTH);
-                if (smatch(vp, "REMOTE_HOST") || smatch(vp, "HTTP_AUTHORIZATION") ||
-                    smatch(vp, "IFS") || smatch(vp, "CDPATH") ||
-                    smatch(vp, "PATH") || sstarts(vp, "PYTHONPATH") || sstarts(vp, "LD_")) {
+                for (bp = envBlackList; *bp; bp++) {
+                    if (smatch(vp, *bp)) {
+                        continue;
+                    }
+                }
+                if (sstarts(vp, "LD_") || sstarts(vp, "LDR_") || sstarts(vp, "_RLD") || sstarts(vp, "DYLD_") || strstr(vp, "=()")) {
                     continue;
                 }
                 if (s->arg != 0 && *ME_GOAHEAD_CGI_VAR_PREFIX != '\0') {
