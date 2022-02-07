@@ -1662,11 +1662,11 @@ PUBLIC void websRedirect(Webs *wp, cchar *uri)
     message = location = NULL;
     originalPort = port = 0;
 
-    //  This has risk of host header injection. If enabled, must also free host.
-    // host = sclone(wp->host ? wp->host : websHostUrl);
+    //  This has risk of host header injection.
+    //  If enabled, must also free host and MUST sanitize wp->host which comes from the host header.
+    //  host = sclone(wp->host ? wp->host : websHostUrl);
 
     host = websHostUrl;
-
     pstr = strchr(host, ']');
     pstr = pstr ? pstr : host;
     if ((pstr = strchr(pstr, ':')) != 0) {
