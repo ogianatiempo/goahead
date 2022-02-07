@@ -626,7 +626,7 @@ static CgiPid launchCgi(char *cgiPath, char **argp, char **envp, char *stdIn, ch
         return -1;
     }
 
-    pid = vfork();
+    pid = fork();
     if (pid == 0) {
         /*
             Child
