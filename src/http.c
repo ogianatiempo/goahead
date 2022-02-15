@@ -3261,50 +3261,30 @@ WebsSession *websGetSession(Webs *wp, int create)
 }
 
 
-static char *websParseCookie(Webs *wp, char *name)
+PUBLIC char *websParseCookie(Webs *wp, char *name)
 {
-    cchar   *cookie;
-    char    *cp, *value;
-    ssize   nlen;
-    int     quoted;
+    char    *buf, *cookie, *end, *key, *tok, *value;
 
     assert(wp);
 
-    if ((cookie = wp->cookie) == 0 || name == 0 || *name == '\0') {
+    if (wp->cookie == 0 || name == 0 || *name == '\0') {
         return 0;
     }
-    nlen = slen(name);
-    while ((value = strstr(cookie, name)) != 0) {
-        /* Ignore corrupt cookies of the form "name=;" */
-        if ((value == wp->cookie || value[-1] == ' ' || value[-1] == ';') && value[nlen] == '=' && value[nlen+1] != ';') {
-            break;
-        }
-        cookie += (value - cookie) + nlen;
+    buf = sclone(wp->cookie);
+    end = &buf[slen(buf)];
+    value = 0;
+
+    for (tok = buf; tok < end; ) {
+         cookie = stok(tok, ";", &tok);
+         key = stok(cookie, "=", &value);
+         if (smatch(key, name)) {
+             // Remove leading spaces first, then double quotes. Spaces inside double quotes preserved.
+             value = sclone(strim(strim(value, " ", WEBS_TRIM_BOTH), "\"", WEBS_TRIM_BOTH));
+             break;
+         }
     }
-    if (value == 0) {
-        return 0;
-    }
-    value += nlen;
-    while (isspace((uchar) *value) || *value == '=') {
-        value++;
-    }
-    quoted = 0;
-    if (*value == '"') {
-        value++;
-        quoted++;
-    }
-    for (cp = value; *cp; cp++) {
-        if (quoted) {
-            if (*cp == '"' && cp[-1] != '\\') {
-                break;
-            }
-        } else {
-            if ((*cp == ',' || *cp == ';') && cp[-1] != '\\') {
-                break;
-            }
-        }
-    }
-    return snclone(value, cp - value);
+    wfree(buf);
+    return value;
 }
 
 

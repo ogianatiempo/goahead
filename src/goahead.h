@@ -2369,6 +2369,9 @@ PUBLIC char *websGetCgiCommName(void);
  */
 PUBLIC cchar *websGetCookie(Webs *wp);
 
+// Internal
+PUBLIC char *websParseCookie(Webs *wp, char *name);
+
 /**
     Get a date as a string
     @description If sbuf is supplied, it is used to calculate the date. Otherwise, the current time is used.
