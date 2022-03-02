@@ -80,7 +80,7 @@ PUBLIC int websDefineAction(cchar *name, void *fn)
 }
 
 
-static void closeAction()
+static void closeAction(void)
 {
     if (actionTable != -1) {
         hashFree(actionTable);
