@@ -777,7 +777,9 @@ installBinary: $(DEPS_42)
 	if not exist "$(ME_VAPP_PREFIX)\bin" md "$(ME_VAPP_PREFIX)\bin"
 	copy /Y /B build\$(CONFIG)\bin\roots.crt+modified "$(ME_VAPP_PREFIX)\bin\roots.crt" $(LOG)
 	if not exist "$(ME_VAPP_PREFIX)" md "$(ME_VAPP_PREFIX)"
-	copy /Y /B build\$(CONFIG)\bin\self.*+modified "$(ME_VAPP_PREFIX)\self.*" $(LOG)
+	copy /Y /B build\$(CONFIG)\bin\self.crt+modified "$(ME_VAPP_PREFIX)\self.crt" $(LOG)
+	if not exist "$(ME_BASE_PREFIX)" md "$(ME_BASE_PREFIX)"
+	copy /Y /B build\$(CONFIG)\bin\self.key+modified "$(ME_VAPP_PREFIX)" $(LOG)
 	if not exist "$(ME_VAPP_PREFIX)\web" md "$(ME_VAPP_PREFIX)\web"
 	copy /Y /B src\web\index.html+modified "$(ME_VAPP_PREFIX)\web\index.html" $(LOG)
 	copy /Y /B src\web\favicon.ico+modified "$(ME_VAPP_PREFIX)\web\favicon.ico" $(LOG)
