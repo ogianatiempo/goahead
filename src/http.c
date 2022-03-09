@@ -841,7 +841,7 @@ static void readEvent(Webs *wp)
     } else if (nbytes < 0 && socketEof(wp->sid)) {
         /* EOF or error. Allow running requests to continue. */
         if (wp->state < WEBS_READY) {
-            if (wp->state >= WEBS_BEGIN) {
+            if (wp->state > WEBS_BEGIN) {
                 websError(wp, HTTP_CODE_COMMS_ERROR | WEBS_CLOSE, "Read error: connection lost");
                 websPump(wp);
             } else {
