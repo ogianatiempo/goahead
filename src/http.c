@@ -3274,7 +3274,7 @@ PUBLIC char *websParseCookie(Webs *wp, char *name)
     end = &buf[slen(buf)];
     value = 0;
 
-    for (tok = buf; tok < end; ) {
+    for (tok = buf; tok && tok < end; ) {
          cookie = stok(tok, ";", &tok);
          key = stok(cookie, "=", &value);
          if (smatch(key, name)) {
