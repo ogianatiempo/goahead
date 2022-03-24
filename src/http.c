@@ -3263,7 +3263,7 @@ WebsSession *websGetSession(Webs *wp, int create)
 
 PUBLIC char *websParseCookie(Webs *wp, char *name)
 {
-    char    *buf, *cookie, *end, *key, *tok, *value;
+    char    *buf, *cookie, *end, *key, *tok, *value, *vtok;
 
     assert(wp);
 
@@ -3276,10 +3276,10 @@ PUBLIC char *websParseCookie(Webs *wp, char *name)
 
     for (tok = buf; tok && tok < end; ) {
          cookie = stok(tok, ";", &tok);
-         key = stok(cookie, "=", &value);
+         key = stok(cookie, "=", &vtok);
          if (smatch(key, name)) {
              // Remove leading spaces first, then double quotes. Spaces inside double quotes preserved.
-             value = sclone(strim(strim(value, " ", WEBS_TRIM_BOTH), "\"", WEBS_TRIM_BOTH));
+             value = sclone(strim(strim(vtok, " ", WEBS_TRIM_BOTH), "\"", WEBS_TRIM_BOTH));
              break;
          }
     }
