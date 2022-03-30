@@ -3276,6 +3276,7 @@ PUBLIC char *websParseCookie(Webs *wp, char *name)
 
     for (tok = buf; tok && tok < end; ) {
          cookie = stok(tok, ";", &tok);
+         cookie = strim(cookie, " ", WEBS_TRIM_START);
          key = stok(cookie, "=", &vtok);
          if (smatch(key, name)) {
              // Remove leading spaces first, then double quotes. Spaces inside double quotes preserved.
