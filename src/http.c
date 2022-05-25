@@ -1627,6 +1627,7 @@ PUBLIC void websResponse(Webs *wp, int code, cchar *message)
         websWriteEndHeaders(wp);
         websWriteBlock(wp, message, len);
         websWriteBlock(wp, "\r\n", 2);
+        websFlush(wp, 1);
     } else {
         websWriteHeaders(wp, 0, 0);
         websWriteEndHeaders(wp);
