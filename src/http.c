@@ -665,13 +665,6 @@ PUBLIC int websListen(cchar *endpoint)
     }
     logmsg(2, "Started %s://%s:%d", secure ? "https" : "http", ipaddr, port);
 
-    if (!websHostUrl) {
-        if (port == 80) {
-            websHostUrl = sclone(ip ? ip : websIpAddr);
-        } else {
-            websHostUrl = sfmt("%s:%d", ip ? ip : websIpAddr, port);
-        }
-    }
     if (!websIpAddrUrl) {
         if (port == 80) {
             websIpAddrUrl = sclone(websIpAddr);
@@ -1663,11 +1656,7 @@ PUBLIC void websRedirect(Webs *wp, cchar *uri)
     message = location = NULL;
     originalPort = port = 0;
 
-    //  This has risk of host header injection.
-    //  If enabled, must also free host and MUST sanitize wp->host which comes from the host header.
-    //  host = sclone(wp->host ? wp->host : websHostUrl);
-
-    host = websHostUrl;
+    host = websHostUrl ? websHostUrl : wp->ipaddr;
     pstr = strchr(host, ']');
     pstr = pstr ? pstr : host;
     if ((pstr = strchr(pstr, ':')) != 0) {
