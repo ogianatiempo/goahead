@@ -684,6 +684,9 @@ if ! diff ${INC_DIR}/me.h goahead-macosx-static-me.h >/dev/null 2>&1 ; then
 cp goahead-macosx-static-me.h ${INC_DIR}/me.h
 fi
 fi
+if [ ../src/mbedtls/config.h -nt ${OUT_DIR}/inc/config.h ] ; then
+cp ../src/mbedtls/config.h ${OUT_DIR}/inc/config.h
+fi
 if [ ../src/mbedtls/embedtls.h -nt ${OUT_DIR}/inc/embedtls.h ] ; then
 cp ../src/mbedtls/embedtls.h ${OUT_DIR}/inc/embedtls.h
 fi
@@ -716,6 +719,9 @@ cp ../src/goahead.h ${OUT_DIR}/inc/goahead.h
 fi
 if [ ../src/js.h -nt ${OUT_DIR}/inc/js.h ] ; then
 cp ../src/js.h ${OUT_DIR}/inc/js.h
+fi
+if [ ../src/mbedtls/config.h -nt ${OUT_DIR}/inc/config.h ] ; then
+cp ../src/mbedtls/config.h ${OUT_DIR}/inc/config.h
 fi
 if [ ../src/mbedtls/embedtls.h -nt ${OUT_DIR}/inc/embedtls.h ] ; then
 cp ../src/mbedtls/embedtls.h ${OUT_DIR}/inc/embedtls.h
@@ -1154,7 +1160,6 @@ ENABLE_TESTABILITY = YES;
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=1",
 					"$(inherited)"
 				);
@@ -1173,7 +1178,6 @@ ENABLE_TESTABILITY = YES;
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=0",
 					"$(inherited)"
 				);
@@ -1192,7 +1196,6 @@ ENABLE_TESTABILITY = YES;
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=1",
 					"$(inherited)"
 				);
@@ -1211,7 +1214,6 @@ ENABLE_TESTABILITY = YES;
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=0",
 					"$(inherited)"
 				);
@@ -1230,7 +1232,6 @@ ENABLE_TESTABILITY = YES;
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=1",
 					"$(inherited)"
 				);
@@ -1249,7 +1250,6 @@ ENABLE_TESTABILITY = YES;
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=0",
 					"$(inherited)"
 				);
@@ -1301,7 +1301,6 @@ ENABLE_TESTABILITY = YES;
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=1",
 					"$(inherited)"
 				);
@@ -1321,7 +1320,6 @@ ENABLE_TESTABILITY = YES;
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=0",
 					"$(inherited)"
 				);
@@ -1340,7 +1338,6 @@ ENABLE_TESTABILITY = YES;
 
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=1",
 					"$(inherited)"
 				);
@@ -1359,7 +1356,6 @@ ENABLE_TESTABILITY = YES;
 
     				GCC_PREPROCESSOR_DEFINITIONS = (
 					"_FILE_OFFSET_BITS=64",
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=0",
 					"$(inherited)"
 				);
@@ -1377,7 +1373,6 @@ ENABLE_TESTABILITY = YES;
     				EXECUTABLE_EXTENSION = a;
 
     				GCC_PREPROCESSOR_DEFINITIONS = (
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=1",
 					"$(inherited)"
 				);
@@ -1395,7 +1390,6 @@ ENABLE_TESTABILITY = YES;
     				EXECUTABLE_EXTENSION = a;
 
     				GCC_PREPROCESSOR_DEFINITIONS = (
-					"MBEDTLS_USER_CONFIG_FILE=\\\"embedtls.h\\\"",
 					"ME_DEBUG=0",
 					"$(inherited)"
 				);

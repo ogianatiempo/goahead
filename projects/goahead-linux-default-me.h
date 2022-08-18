@@ -28,13 +28,13 @@
     #define ME_COMPILER_FORTIFY 1
 #endif
 #ifndef ME_COMPILER_HAS_ATOMIC
-    #define ME_COMPILER_HAS_ATOMIC 0
+    #define ME_COMPILER_HAS_ATOMIC 1
 #endif
 #ifndef ME_COMPILER_HAS_ATOMIC64
-    #define ME_COMPILER_HAS_ATOMIC64 0
+    #define ME_COMPILER_HAS_ATOMIC64 1
 #endif
 #ifndef ME_COMPILER_HAS_DOUBLE_BRACES
-    #define ME_COMPILER_HAS_DOUBLE_BRACES 0
+    #define ME_COMPILER_HAS_DOUBLE_BRACES 1
 #endif
 #ifndef ME_COMPILER_HAS_DYN_LOAD
     #define ME_COMPILER_HAS_DYN_LOAD 1
@@ -64,13 +64,13 @@
     #define ME_COMPILER_HAS_SYNC64 1
 #endif
 #ifndef ME_COMPILER_HAS_SYNC_CAS
-    #define ME_COMPILER_HAS_SYNC_CAS 0
+    #define ME_COMPILER_HAS_SYNC_CAS 1
 #endif
 #ifndef ME_COMPILER_HAS_UNNAMED_UNIONS
     #define ME_COMPILER_HAS_UNNAMED_UNIONS 1
 #endif
 #ifndef ME_COMPILER_WARN64TO32
-    #define ME_COMPILER_WARN64TO32 0
+    #define ME_COMPILER_WARN64TO32 1
 #endif
 #ifndef ME_COMPILER_WARN_UNUSED
     #define ME_COMPILER_WARN_UNUSED 1
@@ -385,14 +385,8 @@
 #ifndef ME_COM_LIB
     #define ME_COM_LIB 1
 #endif
-#ifndef ME_COM_MATRIXSSL
-    #define ME_COM_MATRIXSSL 0
-#endif
 #ifndef ME_COM_MBEDTLS
     #define ME_COM_MBEDTLS 1
-#endif
-#ifndef ME_COM_NANOSSL
-    #define ME_COM_NANOSSL 0
 #endif
 #ifndef ME_COM_OPENSSL
     #define ME_COM_OPENSSL 0
