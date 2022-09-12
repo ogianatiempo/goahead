@@ -1656,7 +1656,9 @@ PUBLIC void websRedirect(Webs *wp, cchar *uri)
     message = location = NULL;
     originalPort = port = 0;
 
-    host = websHostUrl ? websHostUrl : wp->ipaddr;
+    // Host header injection
+    // host = websHostUrl ? websHostUrl : wp->ipaddr;
+    host = sclone(wp->host);
     pstr = strchr(host, ']');
     pstr = pstr ? pstr : host;
     if ((pstr = strchr(pstr, ':')) != 0) {
@@ -1702,6 +1704,7 @@ PUBLIC void websRedirect(Webs *wp, cchar *uri)
     websWriteBlock(wp, message, len);
     websWriteBlock(wp, "\r\n", 2);
     websDone(wp);
+    wfree(host);
     wfree(message);
     wfree(location);
     wfree(encoded);
